@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% block content %}
+<!--Main-->
+<div class="grid"></div>
+<div class="grid col-start-2 col-end-5 pt-24">
+<!--Left Col-->
+<div class="grid">
+  <h1 class="my-4 text-3xl text-white opacity-75 font-bold leading-tight text-center">
+    Just
+    <span class="bg-clip-text text-transparent bg-gradient-to-r from-green-400 via-pink-500 to-purple-500">
+       YouTube 
+    </span>
+    downloader!
+  </h1>
+  
+  <form action="{{ action }}" method="post" class="grid grid-cols-6 bg-gray-900 opacity-75 shadow-lg rounded-lg p-4 hover:opacity-95 hover:scale-105 duration-300 ease-in-out">
+    <div class="grid col-span-5">
+      <input class="shadow appearance-none border rounded-l-md px-2 text-gray-700 leading-tight focus:ring-2 ring-violet-500 ring-inset transform transition  duration-300 ease-in-out" id="url" type="url" placeholder="URL YouTube video or playlist" name="url" onsubmit="url.value">
+    </div>
+    <div class="grid">
+      <button class="bg-gradient-to-r from-purple-800 to-green-500 hover:from-pink-500 hover:to-green-500 text-white font-bold py-2 px-4 rounded-r-md focus:ring transform transition duration-300 ease-in-out" type="submit" name="url" onclick="url.value">
+        Search
+      </button>
+    </div>
+  </form>
+</div>
+</div>
+<div class="grid"></div>
+<!---->
+{% endblock %}

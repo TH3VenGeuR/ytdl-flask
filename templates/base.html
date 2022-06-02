@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <meta name="description" content="" />
+    <meta name="keywords" content="" />
+    {% if title %}
+    <title>{{ title }}</title>
+    {% else %}
+    <title>YouTube Downloader</title>
+    {% endif %}
+    <link rel="stylesheet" href='/static/style.css' />
+	<link rel="icon" type="image/x-icon" href="/static/favicon.ico">
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap");
+      html {
+        font-family: "Poppins", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+      }
+    </style>
+    </head>
+    <body class="grid grid-cols-5 leading-normal tracking-normal text-indigo-400 bg-cover bg-fixed" style="background-color: rgb(15, 23, 42); background-image: radial-gradient(at 49% 62%, rgb(2, 132, 199) 0, transparent 36%), radial-gradient(at 39% 32%, rgb(126, 34, 206) 0, transparent 48%), radial-gradient(at 61% 31%, rgb(139, 92, 246) 0, transparent 48%), radial-gradient(at 30% 54%, rgb(6, 78, 59) 0, transparent 62%), radial-gradient(at 82% 57%, rgb(30, 64, 175) 0, transparent 59%), radial-gradient(at 79% 26%, rgb(192, 38, 211) 0, transparent 41%), radial-gradient(at 22% 26%, rgb(127, 29, 29) 0, transparent 30%);">
+    {% block content %}
+    {% endblock %}
+    {% extends "footer.html" %}
+    </body>
+</html>

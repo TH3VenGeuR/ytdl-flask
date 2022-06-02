@@ -1,0 +1,21 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+__pypackages__/
+
+node_modules/
+# Environments
+.env
+.venv
+*/.env
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+
+.git/
+.idea/
+*.bak
+*.json
+input.css
+output.css

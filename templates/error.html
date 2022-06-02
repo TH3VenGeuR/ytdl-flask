@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="col-span-5 flex justify-center w-full pt-44 pb-6 text-center origin-center">
+    <div class="error-template">
+        <h1 class="text-4xl">
+            Oops!</h1>
+        <h2 class="text-9xl">
+            {{ error }}</h2>
+        <div class="text-xl p-2">
+            {{ message }}
+        </div>
+        <div class="flex justify-center">
+            <a href="/" class="btn btn-primary btn-lg">
+                <img src="../static/home.png" alt="home" class="px-2 opacity-30 hover:opacity-95 hover:scale-105 duration-300 ease-in-out">
+            </a>
+            <a href="/contacts/" class="btn btn-default btn-lg">
+                <img src="../static/contacts.png" alt="contact" class="px-2 opacity-30 hover:opacity-95 hover:scale-105 duration-300 ease-in-out">
+            </a>
+        </div>
+    </div>
+</div>
+{% endblock %}
