@@ -16,6 +16,5 @@ venv.bak/
 .git/
 .idea/
 *.bak
-*.json
-input.css
-output.css
+templates/*.json
+templates/*.css

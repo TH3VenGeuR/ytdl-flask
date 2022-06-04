@@ -5,23 +5,21 @@
 <div class="grid col-start-2 col-end-5 pt-24">
 <!--Left Col-->
 <div class="grid">
-  <h1 class="my-4 text-3xl text-white opacity-75 font-bold leading-tight text-center">
+  <h1 class="md:text-3xl my-4 text-xl text-white opacity-75 font-bold leading-tight text-center">
     Just
     <span class="bg-clip-text text-transparent bg-gradient-to-r from-green-400 via-pink-500 to-purple-500">
-       YouTube 
+       YouTube
     </span>
     downloader!
   </h1>
-  
-  <form action="{{ action }}" method="post" class="grid grid-cols-6 bg-gray-900 opacity-75 shadow-lg rounded-lg p-4 hover:opacity-95 hover:scale-105 duration-300 ease-in-out">
-    <div class="grid col-span-5">
-      <input class="shadow appearance-none border rounded-l-md px-2 text-gray-700 leading-tight focus:ring-2 ring-violet-500 ring-inset transform transition  duration-300 ease-in-out" id="url" type="url" placeholder="URL YouTube video or playlist" name="url" onsubmit="url.value">
-    </div>
-    <div class="grid">
-      <button class="bg-gradient-to-r from-purple-800 to-green-500 hover:from-pink-500 hover:to-green-500 text-white font-bold py-2 px-4 rounded-r-md focus:ring transform transition duration-300 ease-in-out" type="submit" name="url" onclick="url.value">
-        Search
+  <form action="{{ action }}" method="post" class="flex w-full bg-gray-900 opacity-75 shadow-lg rounded-lg p-4 hover:opacity-95 hover:scale-105 duration-300 ease-in-out">
+      <input class="w-full h-10 shadow appearance-none border rounded-l-md px-2 text-gray-700 leading-tight focus:ring-2 ring-violet-500 ring-inset transform transition  duration-300 ease-in-out" id="url" type="url" placeholder="URL YouTube video or playlist" name="url" onsubmit="url.value">
+      <button class="w-20 flex justify-center bg-gradient-to-r from-purple-800 to-green-500 hover:from-pink-500 hover:to-green-500 text-white font-bold py-2 px-4 rounded-r-md focus:ring transform transition duration-300 ease-in-out" type="submit" name="url" onclick="url.value">
+        <svg class="w-6 absolute" role="img" viewBox="0 0 512 512">
+          <path fill="currentColor" d="M505 442.7L405.3 343c-4.5-4.5-10.6-7-17-7H372c27.6-35.3 44-79.7 44-128C416 93.1 322.9 0 208 0S0 93.1 0 208s93.1 208 208 208c48.3 0 92.7-16.4 128-44v16.3c0 6.4 2.5 12.5 7 17l99.7 99.7c9.4 9.4 24.6 9.4 33.9 0l28.3-28.3c9.4-9.4 9.4-24.6.1-34zM208 336c-70.7 0-128-57.2-128-128 0-70.7 57.2-128 128-128 70.7 0 128 57.2 128 128 0 70.7-57.2 128-128 128z"></path>
+        </svg>
+        <!--<p class="pl-4">Search</p>-->
       </button>
-    </div>
   </form>
 </div>
 </div>

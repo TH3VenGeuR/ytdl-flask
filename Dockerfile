@@ -13,4 +13,4 @@ COPY --from=compile-image /opt/venv /opt/venv
 ENV PATH="/opt/venv/bin:$PATH"
 WORKDIR /usr/src/app/
 COPY ./ /usr/src/app/
-CMD ["python", "-m", "main.py"]
+ENTRYPOINT ["python", "-m", "main.py"]
