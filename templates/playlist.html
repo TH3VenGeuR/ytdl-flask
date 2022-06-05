@@ -1,7 +1,5 @@
 {% extends "base.html" %}
 {% block content %}
-
-
     {% for video in playlist %}
         {% set video_title = video[2] %}
         {% set video_thumbnail = video[1] %}
@@ -9,37 +7,46 @@
         {% set url_360 = video[0][0][1] %}
         {% set res_720 = video[0][1][0] %}
         {% set url_720 = video[0][1][1] %}
-        
 <!---->
-<div class="container max-w-lg mx-auto items-center p-2">
-    <!--Left Col-->
-    <div class="justify-center overflow-y-hidden">
-        <form class="bg-gray-900 grid opacity-75 shadow-lg rounded-lg p-4 hover:opacity-95 duration-300 ease-in-out">
-            <div class="h-auto">
-                <img src="{{ video_thumbnail }}" class="rounded" alt="Thumbnail {{ video_title }}">
-            </div>
-            <div class="grid justify-between ">
-                <h1 class="p-2 text-xs font-extrabold bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-cyan-400 via-lime-400">
-                    {{ video_title }}
-                </h1>
-                  <div class="grid grid-cols-2 items-end">
-                    {% if res_360 %}
-                      <button class="grid bg-gradient-to-r from-purple-800 to-emerald-500 hover:from-cyan-300 hover:to-emerald-500 text-white font-bold p-2 mr-1.5 rounded focus:ring transform transition hover:scale-105 duration-300 ease-in-out" type="button" onclick="location.href='{{ url_360 }}'">
-                        {{ res_360 }}
-                      </button>
-                    {% endif %}
-                    {% if res_720 %}
-                      <button class="grid bg-gradient-to-r from-purple-800 to-emerald-500 hover:from-cyan-300 hover:to-emerald-500 text-white font-bold p-2 ml-1.5 rounded focus:ring transform transition hover:scale-105 duration-300 ease-in-out" type="button" onclick="location.href='{{ url_720 }}'">
-                        {{ res_720 }}
-                      </button>
-                    {% endif %}
-                  </div>
-            </div>
-        </form>
-    </div>
+<div class="md:w-96 w-64 flex flex-row justify-center p-4">
+  <form class="bg-gray-900 opacity-75 shadow-lg rounded-lg p-4 hover:opacity-95 duration-300 ease-in-out">
+      <div class="">
+        <img src="{{ video_thumbnail }}" class="rounded" alt="Thumbnail {{ video_title }}">
+      </div>
+      <div class="flex flex-col justify-center items-center">
+          <h1 class="p-2 md:text-sm text-xs font-extrabold bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-cyan-400 via-lime-400">
+              {{ video_title }}
+          </h1>
+          <div class="w-full flex justify-center">
+            {% if res_360 %}
+              <a href="{{ url_360 }}&title={{ video_title }}"
+              target="_blank"
+              class="grid"
+              download="{{ video_title }}"
+              name="{{ video_title }}.mp4"
+              >
+                  <button class="md:w-40 w-24 p-2 mr-1.5  bg-gradient-to-r from-purple-800 to-emerald-500 hover:from-cyan-300 hover:to-emerald-500 text-white font-bold rounded focus:ring transform transition hover:scale-105 duration-300 ease-in-out" type="button">
+                      {{ res_360 }}
+                  </button>
+              </a>
+            {% endif %}
+            {% if res_720 %}
+              <a href="{{ url_720 }}&title={{ video_title }}"
+              target="_blank"
+              class="grid"
+              download="{{ video_title }}"
+              name="{{ video_title }}.mp4"
+              >
+                  <button class="md:w-40 w-24 p-2 ml-1.5  bg-gradient-to-r from-purple-800 to-emerald-500 hover:from-cyan-300 hover:to-emerald-500 text-white font-bold rounded focus:ring transform transition hover:scale-105 duration-300 ease-in-out" type="button">
+                      {{ res_720 }}
+                  </button>
+              </a>
+            {% endif %}
+          </div>
+      </div>
+  </form>
+</div>
 </div>
 <!---->
-
-
-    {% endfor %} 
+{% endfor %} 
 {% endblock %}
