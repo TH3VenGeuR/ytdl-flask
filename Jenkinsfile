@@ -34,8 +34,8 @@ pipeline {
 				script {
                     try{
 						old_container_id_list = sh "docker --host $DOCKER_HOST ps -a | grep ilyatrof/ytdl-flask | awk '{ print \$1 }'"
-                        for(old_container_id in old_container_id_list){
-							if (old_container_id) {
+                        if (old_container_id_list) {
+							for(old_container_id in old_container_id_list){
 								sh '''
 								echo Kill cootainer $old_container_id
 								docker --host $DOCKER_HOST kill $old_container_id
@@ -47,8 +47,8 @@ pipeline {
                     }
                     try{
 						old_images_id_list = sh "docker --host $DOCKER_HOST images | grep ilyatrof/ytdl-flask | awk '{ print \$3 }'"
-                        for(old_images_id in old_images_id_list){
-							if (old_images_id) {
+                        if (old_images_id_list) {
+							for(old_images_id in old_images_id_list){
 							sh '''
 							echo Remove image $old_images_id
 							docker --host $DOCKER_HOST rmi -f $old_images_id
