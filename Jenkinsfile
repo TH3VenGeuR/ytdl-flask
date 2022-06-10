@@ -34,13 +34,18 @@ pipeline {
 				script {
                     try{
 						def old_container_id_list = sh(returnStdout: true, script: "docker --host $DOCKER_HOST ps -a | grep ilyatrof/ytdl-flask | awk '{ print \$1 }'")
-                        println old_container_id_list
+                        echo Container IDs:
+						println old_container_id_list
 						if (old_container_id_list) {
+							echo IF is True Container IDs:
+							println old_container_id_list
 							for(old_container_id in old_container_id_list){
-								sh '''
-								echo Kill cootainer $old_container_id
-								docker --host $DOCKER_HOST kill $old_container_id
-								'''
+								echo ODL Container ID:
+								println old_container_id
+								//sh '''
+								//echo Kill cootainer $old_container_id
+								//docker --host $DOCKER_HOST kill $old_container_id
+								//'''
 							}
 						}
                     }catch (err) {
