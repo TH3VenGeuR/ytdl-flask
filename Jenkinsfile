@@ -39,16 +39,22 @@ pipeline {
 						if (old_container_id_list) {
 							sh 'echo IF is True Container IDs'
 							println old_container_id_list
-							def i = 0
-							for(old_container_id in old_container_id_list){
-								$i++
-								sh 'echo old Container ID num $i'
-								println old_container_id
+							
+							old_container_id_list.eachWithIndex{it,index->
+								println "value " + it + " at index " +index
+							}
+							
+							//def i = 0
+							//for(old_container_id in old_container_id_list){
+							//	$i++
+							//	sh 'echo old Container ID num $i'
+							//	println old_container_id
 								//sh '''
 								//echo Kill cootainer $old_container_id
 								//docker --host $DOCKER_HOST kill $old_container_id
 								//'''
-							}
+							//}
+							
 						}
                     }catch (err) {
                         sh 'echo Kill older cootainers ERROR'
