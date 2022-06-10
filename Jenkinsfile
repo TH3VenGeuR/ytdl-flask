@@ -44,12 +44,13 @@ pipeline {
                         sh 'echo Kill older cootainers ERROR'
                     }
                     try{
+						//get string IDs images and converted to array
 						def old_images_id_list = (sh(returnStdout: true, script: "docker --host $DOCKER_HOST images | grep ilyatrof/ytdl-flask | awk '{ print \$3 }'")).split('\n')
-						//def old_images_id_list = sh(returnStdout: true, script: "docker --host $DOCKER_HOST images | grep ilyatrof/ytdl-flask | awk '{ print \$3 }'")
-						//def old_images_id_array = old_images_id_list.split('\n')
-						println old_images_id_list[0]
 						for (id in old_images_id_list) {
-							println id
+							sh '''
+							echo Remove image ID $id
+							docker --host $DOCKER_HOST rmi -f $id
+							'''
 						}
                     }catch (err) {
                         sh 'echo Remove older image ERROR'
