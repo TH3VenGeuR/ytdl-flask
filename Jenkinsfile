@@ -48,10 +48,10 @@ pipeline {
                         println old_images_id_list
 						def old_img_id_list = old_images_id_list.split('\n')
 						println old_img_id_list[0]
-						def old_img_id_list2 = old_images_id_list.split('\\R')
+						def old_img_id_list2 = old_images_id_list.split('\\n')
 						println old_img_id_list3[0]
-						def old_img_id_list2 = old_images_id_list.split('\\R')
-						println old_img_id_list3[0]
+						//def old_img_id_list2 = old_images_id_list.split('\\R')
+						//println old_img_id_list3[0]
                     }catch (err) {
                         sh 'echo Remove older image ERROR'
                     }
