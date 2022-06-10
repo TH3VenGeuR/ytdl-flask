@@ -49,7 +49,8 @@ pipeline {
 					if (build_images_id_list) {
 						sh """
 						echo Clearing after build
-						echo Remove docker image on Jenkins server
+						docker ps
+						docker ps -a
 						docker rmi -f $build_images_id_list
 						"""
 					}
