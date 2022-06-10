@@ -36,7 +36,7 @@ pipeline {
 						def old_container_id_list = sh(returnStdout: true, script: "docker --host $DOCKER_HOST ps -a | grep ilyatrof/ytdl-flask | awk '{ print \$1 }'")
                         sh 'echo Container IDs'
 						println old_container_id_list
-						old_con_id_list = old_container_id_list.split('\n')
+						def old_con_id_list = old_container_id_list.split(' ')
 						println old_con_id_list
 						
 						
