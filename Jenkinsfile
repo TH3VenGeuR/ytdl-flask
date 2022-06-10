@@ -48,6 +48,7 @@ pipeline {
 						//def old_images_id_list = sh(returnStdout: true, script: "docker --host $DOCKER_HOST images | grep ilyatrof/ytdl-flask | awk '{ print \$3 }'")
 						//def old_images_id_array = old_images_id_list.split('\n')
 						println old_images_id_list[0]
+						println old_images_id_list
                     }catch (err) {
                         sh 'echo Remove older image ERROR'
                     }
