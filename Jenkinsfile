@@ -34,10 +34,10 @@ pipeline {
 				script {
                     try{
 						def old_container_id_list = sh(returnStdout: true, script: "docker --host $DOCKER_HOST ps -a | grep ilyatrof/ytdl-flask | awk '{ print \$1 }'")
-                        sh 'echo Container IDs'
-						println old_container_id_list
-						def old_con_id_list = old_container_id_list.split(' ')
-						println old_con_id_list
+                        //sh 'echo Container IDs'
+						//println old_container_id_list
+						//def old_con_id_list = old_container_id_list.split(' ')
+						//println old_con_id_list
 						
 						
                     }catch (err) {
@@ -46,8 +46,8 @@ pipeline {
                     try{
 						def old_images_id_list = sh(returnStdout: true, script: "docker --host $DOCKER_HOST images | grep ilyatrof/ytdl-flask | awk '{ print \$3 }'")
                         println old_images_id_list
-						println old_images_id_list.size()
-						println old_images_id_list[1]
+						def old_img_id_list = old_images_id_list.split(' ')
+						println old_img_id_list[0]
                     }catch (err) {
                         sh 'echo Remove older image ERROR'
                     }
