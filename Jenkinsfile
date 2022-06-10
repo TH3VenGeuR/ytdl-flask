@@ -50,7 +50,7 @@ pipeline {
 						sh """
 						echo Clearing after build
 						echo Remove docker image on Jenkins server
-						docker --host $DOCKER_HOST rmi -f $build_images_id_list
+						docker rmi -f $build_images_id_list
 						"""
 					}
 				}
