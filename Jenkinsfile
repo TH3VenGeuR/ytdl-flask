@@ -31,6 +31,7 @@ pipeline {
 				echo Pulling image
                 docker --host $DOCKER_HOST pull ilyatrof/ytdl-flask:v${BUILD_NUMBER}
 				'''
+				script {
                     try{
 						old_container_id = sh "docker --host $DOCKER_HOST ps -a | grep ilyatrof/ytdl-flask | awk '{ print \$1 }'"
                         sh '''
@@ -54,10 +55,10 @@ pipeline {
                         sh 'echo Remove older image ERROR'
 
                     }
-                
+                }
                 sh 'echo Deploy new container'
                 sh 'docker --host $DOCKER_HOST run --rm --name ytdl-flask-app -d -p 5000:5000 ilyatrof/ytdl-flask:v${BUILD_NUMBER}'
-
+					
             }
         }
 		stage('Clearing') {
