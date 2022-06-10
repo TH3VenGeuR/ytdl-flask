@@ -58,9 +58,7 @@ pipeline {
                 sh 'echo Deploy new container'
                 sh 'docker --host $DOCKER_HOST run --rm --name ytdl-flask-app -d -p 5000:5000 ilyatrof/ytdl-flask:v${BUILD_NUMBER}'
 
-                
-                }
-            }	
+            }
         }
 		stage('Clearing') {
             steps {
@@ -71,7 +69,7 @@ pipeline {
 				echo Remove docker image on Jenkins server
 				docker rmi ilyatrof/ytdl-flask:v${BUILD_NUMBER}
 				'''
+				}
 			}
-		}	
-    }
+		}
 }
