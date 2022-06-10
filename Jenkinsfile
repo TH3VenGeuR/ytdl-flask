@@ -13,9 +13,7 @@ pipeline {
         stage('Build') {
             steps {
                 sh '''
-				echo ######################
-				echo #Start building image#
-				echo ######################
+				echo Start building image
 				docker build -t ilyatrof/ytdl-flask:v${BUILD_NUMBER} .
 				echo $DOCKERHUB_PSW | docker login -u $DOCKERHUB_USR --password-stdin
 				docker push ilyatrof/ytdl-flask:v${BUILD_NUMBER}
@@ -24,11 +22,6 @@ pipeline {
         }
         stage('Deploy') {
             steps {
-				sh '''
-				echo Deploy to remote docker host
-				echo Pulling image
-                docker --host $DOCKER_HOST pull ilyatrof/ytdl-flask:v${BUILD_NUMBER}
-				'''
 				script {
                     try{
 						def old_container_id_list = (sh(returnStdout: true, script: "docker --host $DOCKER_HOST ps -a | grep ilyatrof/ytdl-flask | awk '{ print \$1 }'")).replace("\n", " ")
@@ -51,13 +44,14 @@ pipeline {
         }
 		stage('Clearing') {
             steps {
-				sh '''
-				echo ######################
-				echo #Clearing after build#
-				echo ######################
-				echo Remove docker image on Jenkins server
-				docker rmi ilyatrof/ytdl-flask:v${BUILD_NUMBER}
-				'''
+				def build_images_id_list = (sh(returnStdout: true, script: "docker images | grep ilyatrof/ytdl-flask | awk '{ print \$3 }'")).replace("\n", " ")
+				if (build_images_id_list) {
+					sh """
+					echo Clearing after build
+					echo Remove docker image on Jenkins server
+					docker --host $DOCKER_HOST rmi -f $build_images_id_list
+					"""
+				}
 				}
 			}
 		}
