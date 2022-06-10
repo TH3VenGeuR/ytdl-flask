@@ -32,7 +32,7 @@ pipeline {
                 docker --host $DOCKER_HOST pull ilyatrof/ytdl-flask:v${BUILD_NUMBER}
 				'''
                     try{
-						old_container_id = sh "docker --host $DOCKER_HOST ps -a | grep ilyatrof/ytdl-flask | awk '{ print $1 }'"
+						old_container_id = sh "docker --host $DOCKER_HOST ps -a | grep ilyatrof/ytdl-flask | awk '{ print \$1 }'"
                         sh '''
 						echo Try to kill cootainer $old_container_id
                         docker --host $DOCKER_HOST kill $old_container_id
@@ -42,12 +42,12 @@ pipeline {
 
                     }
                     try{
-						old_images_id_list = sh "docker --host $DOCKER_HOST images | grep ilyatrof/ytdl-flask | awk '{ print $3 }'"
+						old_images_id_list = sh "docker --host $DOCKER_HOST images | grep ilyatrof/ytdl-flask | awk '{ print \$3 }'"
                         for(item in old_images_id_list){
 							println item
 						}
 						sh 'echo Try to remove older image'
-						//docker images | grep ilyatrof/ytdl-flask | awk '{ print $3 }'
+						//docker images | grep ilyatrof/ytdl-flask | awk '{ print \$3 }'
                         //sh 'docker --host $DOCKER_HOST rmi -f ilyatrof/ytdl-flask:v${BUILD_NUMBER-1}'
 
                     }catch (err) {
