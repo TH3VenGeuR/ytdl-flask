@@ -44,15 +44,17 @@ pipeline {
         }
 		stage('Clearing') {
             steps {
-				def build_images_id_list = (sh(returnStdout: true, script: "docker images | grep ilyatrof/ytdl-flask | awk '{ print \$3 }'")).replace("\n", " ")
-				if (build_images_id_list) {
-					sh """
-					echo Clearing after build
-					echo Remove docker image on Jenkins server
-					docker --host $DOCKER_HOST rmi -f $build_images_id_list
-					"""
-				}
+				script {
+					def build_images_id_list = (sh(returnStdout: true, script: "docker images | grep ilyatrof/ytdl-flask | awk '{ print \$3 }'")).replace("\n", " ")
+					if (build_images_id_list) {
+						sh """
+						echo Clearing after build
+						echo Remove docker image on Jenkins server
+						docker --host $DOCKER_HOST rmi -f $build_images_id_list
+						"""
+					}
 				}
 			}
 		}
+	}
 }
