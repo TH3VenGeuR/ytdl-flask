@@ -25,37 +25,21 @@ pipeline {
         stage('Deploy') {
             steps {
 				sh '''
-				echo #######################
-				echo #Deploy to remote host#
-				echo #######################
+				echo Deploy to remote docker host
 				echo Pulling image
                 docker --host $DOCKER_HOST pull ilyatrof/ytdl-flask:v${BUILD_NUMBER}
 				'''
 				script {
                     try{
-						def old_container_id_list = sh(returnStdout: true, script: "docker --host $DOCKER_HOST ps -a | grep ilyatrof/ytdl-flask | awk '{ print \$1 }'")
-                        //sh 'echo Container IDs'
-						//println old_container_id_list
-						//def old_con_id_list = old_container_id_list.split(' ')
-						//println old_con_id_list
-						
-						
+						def old_container_id_list = (sh(returnStdout: true, script: "docker --host $DOCKER_HOST ps -a | grep ilyatrof/ytdl-flask | awk '{ print \$1 }'")).replace("\n", " ")
+						sh 'echo Try to kill cootainers'
+						sh "docker --host $DOCKER_HOST kill $old_container_id_list"
                     }catch (err) {
                         sh 'echo Kill older cootainers ERROR'
                     }
                     try{
-						//get string IDs images and converted to array
-						//def old_images_id_list = (sh(returnStdout: true, script: "docker --host $DOCKER_HOST images | grep ilyatrof/ytdl-flask | awk '{ print \$3 }'")).split('\n')
-						//for (id in old_images_id_list) {
-						//	println id
-						//	sh 'echo Try to remove image ID $id'
-						//	sh 'docker --host $DOCKER_HOST rmi -f $id'
-						//	sh 'echo Removed image ID $id'
-						//	
-						//}
 						def old_images_id_list = (sh(returnStdout: true, script: "docker --host $DOCKER_HOST images | grep ilyatrof/ytdl-flask | awk '{ print \$3 }'")).replace("\n", " ")
-						println old_images_id_list
-						sh 'echo Try to remove image IDs'
+						sh 'echo Try to remove image'
 						sh "docker --host $DOCKER_HOST rmi -f $old_images_id_list"
 					}catch (err) {
                         sh 'echo Remove older image ERROR'
