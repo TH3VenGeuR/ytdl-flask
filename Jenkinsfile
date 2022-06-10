@@ -33,8 +33,9 @@ pipeline {
 				'''
 				script {
                     try{
-						def old_container_id_list = sh returnStdout: true, script: "docker --host $DOCKER_HOST ps -a | grep ilyatrof/ytdl-flask | awk '{ print \$1 }'"
-                        if (old_container_id_list) {
+						def old_container_id_list = sh(returnStdout: true, script: "docker --host $DOCKER_HOST ps -a | grep ilyatrof/ytdl-flask | awk '{ print \$1 }'")
+                        println old_container_id_list
+						if (old_container_id_list) {
 							for(old_container_id in old_container_id_list){
 								sh '''
 								echo Kill cootainer $old_container_id
@@ -46,8 +47,9 @@ pipeline {
                         sh 'echo Kill older cootainers ERROR'
                     }
                     try{
-						def old_images_id_list = sh returnStdout: true, script: "docker --host $DOCKER_HOST images | grep ilyatrof/ytdl-flask | awk '{ print \$3 }'"
-                        if (old_images_id_list) {
+						def old_images_id_list = sh(returnStdout: true, script: "docker --host $DOCKER_HOST images | grep ilyatrof/ytdl-flask | awk '{ print \$3 }'")
+                        println old_images_id_list
+						if (old_images_id_list) {
 							for(old_images_id in old_images_id_list){
 							sh '''
 							echo Remove image $old_images_id
