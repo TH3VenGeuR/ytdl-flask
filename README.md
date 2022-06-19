@@ -1,2 +1,2 @@
 # ytdl-flask
-Simple Flask app using pytube library
+A simple Flask app using pytube library
