@@ -19,10 +19,13 @@ def get_video(url):
     try:
         video = YouTube(url)
         stream = video.streams.filter(progressive=True, file_extension='mp4')
+        saudio = video.streams.filter(only_audio=True).first()
         thumbnail = video.thumbnail_url
         list_url_dl = []
         list_resolution = []
         title = video.title
+        list_url_dl.append(saudio.url)
+        list_resolution.append("No Sound")
         for video in stream:
             list_url_dl.append(video.url)
             list_resolution.append(video.resolution)

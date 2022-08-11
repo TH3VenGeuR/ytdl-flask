@@ -13,7 +13,22 @@
             </h1>
             <div class="w-full flex justify-center">
                 {% if video_data[0] %}
-                    {% set data_360 = video_data[0] %}
+                    {% set data_0 = video_data[0] %}
+                    {% set res_0 = data_0[0] %}
+                    {% set url_0 = data_0[1] %}
+                    <a href="{{ url_0 }}&title={{ video_title }}"
+                       target="_blank"
+                       class="grid"
+                       download="{{ video_title }}"
+                       name="{{ video_title }}.mp4"
+                    >
+                    <button class="md:w-40 w-24 p-2 mr-1.5  bg-gradient-to-r from-purple-800 to-emerald-500 hover:from-cyan-300 hover:to-emerald-500 text-white font-bold rounded focus:ring transform transition hover:scale-105 duration-300 ease-in-out" type="button">
+                        {{ res_0 }}
+                    </button>
+                </a>
+                {% endif %}
+                {% if video_data[1] %}
+                    {% set data_360 = video_data[1] %}
                     {% set res_360 = data_360[0] %}
                     {% set url_360 = data_360[1] %}
                     <a href="{{ url_360 }}&title={{ video_title }}"
@@ -27,8 +42,8 @@
                     </button>
                 </a>
                 {% endif %}
-                    {% if video_data[1] %}
-                    {% set data_720 = video_data[1] %}
+                    {% if video_data[2] %}
+                    {% set data_720 = video_data[2] %}
                     {% set res_720 = data_720[0] %}
                     {% set url_720 = data_720[1] %}
                     <a href="{{ url_720 }}&title={{ video_title }}"
