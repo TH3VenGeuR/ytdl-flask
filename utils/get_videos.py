@@ -25,7 +25,7 @@ def get_video(url):
         list_resolution = []
         title = video.title
         list_url_dl.append(saudio.url)
-        list_resolution.append("No Sound")
+        list_resolution.append("Audio")
         for video in stream:
             list_url_dl.append(video.url)
             list_resolution.append(video.resolution)
