@@ -16,16 +16,17 @@
                     {% set data_0 = video_data[0] %}
                     {% set res_0 = data_0[0] %}
                     {% set url_0 = data_0[1] %}
-                    <a href="{{ url_0 }}&title={{ video_title }}"
-                       target="_blank"
-                       class="grid"
-                       download="{{ video_title }}"
-                       name="{{ video_title }}.mp4"
-                    >
+		    <a href="{{ url_0 }}&title={{ video_title }}" 
+		       target="_blank" 
+		       class="grid" 
+		       download="{{ video_title }}" 
+		       name="{{ video_title }}.mp4"
+		       id="start"
+		    >
                     <button class="md:w-40 w-24 p-2 mr-1.5  bg-gradient-to-r from-purple-800 to-emerald-500 hover:from-cyan-300 hover:to-emerald-500 text-white font-bold rounded focus:ring transform transition hover:scale-105 duration-300 ease-in-out" type="button">
                         {{ res_0 }}
                     </button>
-                </a>
+		    </a>
                 {% endif %}
                 {% if video_data[1] %}
                     {% set data_360 = video_data[1] %}
@@ -63,4 +64,33 @@
 </div>
 </div>
 <!---->
+<script>
+      start.onclick = () => {
+        const url = $('a#start').attr('href');
+        const title = $('a#start').attr('name');
+	console.log(title + " " + url);
+        //const url = 'https://d8d913s460fub.cloudfront.net/videoserver/cat-test-video-320x240.mp4'
+        const fileStream = streamSaver.createWriteStream(title)
+
+        fetch(url).then(res => {
+          const readableStream = res.body
+
+          // more optimized
+          if (window.WritableStream && readableStream.pipeTo) {
+            return readableStream.pipeTo(fileStream)
+              .then(() => console.log('done writing'))
+          }
+
+          window.writer = fileStream.getWriter()
+
+          const reader = res.body.getReader()
+          const pump = () => reader.read()
+            .then(res => res.done
+              ? writer.close()
+              : writer.write(res.value).then(pump))
+
+          pump()
+        })
+      }
+    </script>
 {% endblock %}
